@@ -1,6 +1,7 @@
 "use client";
 
 import { Search } from "lucide-react";
+import Image from "next/image";
 
 export default function Header() {
   return (
@@ -78,10 +79,12 @@ export default function Header() {
 
         {/* Profile */}
         <div className="flex items-center gap-3">
-          <img
-            src="/placeholder-avatar.jpg"
+          <Image
+            src="/images/avatar.png"
             alt="Profile"
-            className="w-10 h-10 rounded-full"
+            width={60}
+            height={60}
+            className="w-[60px] h-[60px] rounded-full"
           />
         </div>
       </div>
