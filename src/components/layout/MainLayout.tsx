@@ -12,9 +12,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
       <Sidebar />
       <Header />
       <main className="pt-[100px] md:pl-[250px] p-6 bg-background">
-        <div className="max-w-[1400px] mx-auto space-y-6 px-[40px] pt-[25px]">
-          {children}
-        </div>
+        <div className="space-y-6 px-[40px] pt-[25px]">{children}</div>
       </main>
     </div>
   );

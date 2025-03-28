@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 const navigation = [
   { name: "Dashboard", href: "/", icon: "/icons/sidebar/dashboard.svg" },
@@ -61,9 +62,11 @@ export default function Sidebar() {
                   : "text-[#B1B1B1] hover:bg-gray-50"
               }`}
             >
-              <img
+              <Image
                 src={item.icon}
                 alt={`${item.name} icon`}
+                width={25}
+                height={25}
                 className="w-[25px] h-[25px]"
                 style={{
                   filter: isActive
