@@ -1,100 +1,158 @@
+import { CreditCard } from "@/components/CreditCard";
+import { WeeklyActivityChart } from "@/components/WeeklyActivityChart";
+import { ExpenseStatistics } from "@/components/ExpenseStatistics";
+
 export default function DashboardPage() {
   return (
-    <div className="space-y-6">
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="card">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-medium text-[#232323]">
-              Total Balance
-            </h3>
-            <span className="icon-[mingcute--chart-line-fill] w-6 h-6 text-[#2D60FF]" />
-          </div>
-          <p className="text-2xl font-semibold text-[#232323]">$24,680.00</p>
-          <p className="text-sm text-[#8BA3CB] mt-1">+2.3% from last month</p>
-        </div>
-
-        <div className="card">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-medium text-[#232323]">
-              Total Spending
-            </h3>
-            <span className="icon-[mingcute--chart-bar-fill] w-6 h-6 text-[#2D60FF]" />
-          </div>
-          <p className="text-2xl font-semibold text-[#232323]">$14,320.00</p>
-          <p className="text-sm text-[#8BA3CB] mt-1">+8.1% from last month</p>
-        </div>
-
-        <div className="card">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-medium text-[#232323]">Total Saved</h3>
-            <span className="icon-[mingcute--wallet-4-fill] w-6 h-6 text-[#2D60FF]" />
-          </div>
-          <p className="text-2xl font-semibold text-[#232323]">$10,360.00</p>
-          <p className="text-sm text-[#8BA3CB] mt-1">+0.8% from last month</p>
-        </div>
-
-        <div className="card">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="text-lg font-medium text-[#232323]">
-              Total Investment
-            </h3>
-            <span className="icon-[mingcute--currency-dollar-fill] w-6 h-6 text-[#2D60FF]" />
-          </div>
-          <p className="text-2xl font-semibold text-[#232323]">$5,920.00</p>
-          <p className="text-sm text-[#8BA3CB] mt-1">+4.5% from last month</p>
-        </div>
-      </div>
-
-      {/* Recent Activity */}
-      <div className="card">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-semibold text-[#232323]">
-            Recent Activity
-          </h2>
-          <button className="text-[#2D60FF] font-medium">View All</button>
-        </div>
-        <div className="space-y-4">
-          {[1, 2, 3, 4, 5].map((item) => (
-            <div
-              key={item}
-              className="flex items-center justify-between p-4 rounded-lg bg-[#F5F7FA]"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center">
-                  <span className="icon-[mingcute--arrow-down-fill] w-6 h-6 text-[#2D60FF]" />
+    <div className="min-h-screen bg-[#F5F7FA]">
+      <div className="max-w-[1440px] mx-auto p-8">
+        <div className="space-y-6">
+          {/* First Row: My Cards (2/3) and Recent Transactions (1/3) */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-semibold text-[#232323]">
+                  My Cards
+                </h2>
+                <button className="text-[#2D60FF] font-medium">See All</button>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <CreditCard
+                  balance="5,756"
+                  cardHolder="Eddy Cusuma"
+                  cardNumber="3778 **** **** 1234"
+                  validThru="12/22"
+                  variant="dark"
+                />
+                <CreditCard
+                  balance="5,756"
+                  cardHolder="Eddy Cusuma"
+                  cardNumber="3778 **** **** 1234"
+                  validThru="12/22"
+                  variant="light"
+                />
+              </div>
+            </div>
+            <div className="bg-white rounded-xl p-6">
+              <h2 className="text-xl font-semibold text-[#232323] mb-6">
+                Recent Transaction
+              </h2>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-4 rounded-lg bg-gray-50">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
+                      <span className="icon-[mingcute--card-fill] w-5 h-5 text-red-500" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-[#232323]">
+                        Deposit from my Card
+                      </p>
+                      <p className="text-sm text-[#8BA3CB]">28 January 2021</p>
+                    </div>
+                  </div>
+                  <p className="text-red-500 font-medium">-$850</p>
                 </div>
-                <div>
-                  <h3 className="text-lg font-medium text-[#232323]">
-                    Online Payment
-                  </h3>
-                  <p className="text-sm text-[#8BA3CB]">
-                    May 14, 2024 at 8:45 PM
-                  </p>
+                <div className="flex items-center justify-between p-4 rounded-lg bg-gray-50">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                      <span className="icon-[mingcute--paypal-fill] w-5 h-5 text-blue-500" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-[#232323]">
+                        Deposit Paypal
+                      </p>
+                      <p className="text-sm text-[#8BA3CB]">25 January 2021</p>
+                    </div>
+                  </div>
+                  <p className="text-green-500 font-medium">+$2,500</p>
+                </div>
+                <div className="flex items-center justify-between p-4 rounded-lg bg-gray-50">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center">
+                      <span className="icon-[mingcute--user-4-fill] w-5 h-5 text-teal-500" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-[#232323]">Jemi Wilson</p>
+                      <p className="text-sm text-[#8BA3CB]">21 January 2021</p>
+                    </div>
+                  </div>
+                  <p className="text-green-500 font-medium">+$5,400</p>
                 </div>
               </div>
-              <p className="text-lg font-medium text-[#232323]">-$28.00</p>
             </div>
-          ))}
-        </div>
-      </div>
+          </div>
 
-      {/* Quick Actions */}
-      <div className="card">
-        <h2 className="text-2xl font-semibold text-[#232323] mb-6">
-          Quick Actions
-        </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {["Send Money", "Receive Money", "Pay Bills", "Top Up"].map(
-            (action) => (
-              <button
-                key={action}
-                className="p-4 rounded-lg bg-[#F5F7FA] text-[#232323] font-medium hover:bg-[#2D60FF] hover:text-white transition-colors"
-              >
-                {action}
-              </button>
-            )
-          )}
+          {/* Second Row: Weekly Activity (2/3) and Expense Statistics (1/3) */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="lg:col-span-2 bg-white rounded-xl p-6">
+              <h2 className="text-xl font-semibold text-[#232323] mb-6">
+                Weekly Activity
+              </h2>
+              <WeeklyActivityChart />
+            </div>
+            <div className="bg-white rounded-xl p-6">
+              <h2 className="text-xl font-semibold text-[#232323] mb-6">
+                Expense Statistics
+              </h2>
+              <ExpenseStatistics />
+            </div>
+          </div>
+
+          {/* Third Row: Quick Transfer (1/3) and Balance History (2/3) */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="bg-white rounded-xl p-6">
+              <h2 className="text-xl font-semibold text-[#232323] mb-6">
+                Quick Transfer
+              </h2>
+              <div className="flex gap-4 mb-6 overflow-x-auto pb-2">
+                {[
+                  { name: "Livia Bator", role: "CEO" },
+                  { name: "Randy Press", role: "Director" },
+                  { name: "Workman", role: "Designer" },
+                ].map((person, i) => (
+                  <div key={i} className="text-center flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-gray-200 mb-2" />
+                    <p className="text-sm font-medium text-[#232323]">
+                      {person.name}
+                    </p>
+                    <p className="text-xs text-[#8BA3CB]">{person.role}</p>
+                  </div>
+                ))}
+                <button className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mt-0.5 flex-shrink-0">
+                  <span className="icon-[mingcute--arrow-right-line] w-5 h-5 text-gray-400" />
+                </button>
+              </div>
+              <div className="flex gap-3">
+                <div className="flex-1 px-4 py-3 bg-gray-50 rounded-lg">
+                  <p className="text-xs text-[#8BA3CB] mb-1">Write Amount</p>
+                  <p className="text-[#232323]">525.50</p>
+                </div>
+                <button className="px-5 py-3 bg-[#232323] text-white rounded-lg font-medium flex items-center gap-2">
+                  Send
+                  <span className="icon-[mingcute--send-plane-fill] w-5 h-5" />
+                </button>
+              </div>
+            </div>
+            <div className="lg:col-span-2 bg-white rounded-xl p-6">
+              <h2 className="text-xl font-semibold text-[#232323] mb-6">
+                Balance History
+              </h2>
+              <div className="h-[200px] relative">
+                {/* This is a placeholder for the area chart */}
+                <div className="absolute inset-0 bg-gradient-to-b from-blue-50 to-transparent rounded-lg" />
+                <div className="absolute bottom-0 left-0 right-0 h-px bg-blue-100" />
+                <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xs text-[#8BA3CB] py-2">
+                  <span>Jul</span>
+                  <span>Aug</span>
+                  <span>Sep</span>
+                  <span>Oct</span>
+                  <span>Nov</span>
+                  <span>Dec</span>
+                  <span>Jan</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
