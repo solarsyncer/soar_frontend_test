@@ -2,27 +2,33 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  LayoutDashboard,
-  Receipt,
-  Users,
-  Briefcase,
-  CreditCard,
-  PiggyBank,
-  Settings,
-  Wrench,
-} from "lucide-react";
 
 const navigation = [
-  { name: "Dashboard", href: "/", icon: LayoutDashboard },
-  { name: "Transactions", href: "/transactions", icon: Receipt },
-  { name: "Accounts", href: "/accounts", icon: Users },
-  { name: "Investments", href: "/investments", icon: Briefcase },
-  { name: "Credit Cards", href: "/credit-cards", icon: CreditCard },
-  { name: "Loans", href: "/loans", icon: PiggyBank },
-  { name: "Services", href: "/services", icon: Wrench },
-  { name: "My Privileges", href: "/privileges", icon: Users },
-  { name: "Setting", href: "/settings", icon: Settings },
+  { name: "Dashboard", href: "/", icon: "/icons/sidebar/dashboard.svg" },
+  {
+    name: "Transactions",
+    href: "#",
+    icon: "/icons/sidebar/transactions.svg",
+  },
+  { name: "Accounts", href: "#", icon: "/icons/sidebar/accounts.svg" },
+  {
+    name: "Investments",
+    href: "#",
+    icon: "/icons/sidebar/investments.svg",
+  },
+  {
+    name: "Credit Cards",
+    href: "#",
+    icon: "/icons/sidebar/credit_cards.svg",
+  },
+  { name: "Loans", href: "#", icon: "/icons/sidebar/loans.svg" },
+  { name: "Services", href: "#", icon: "/icons/sidebar/services.svg" },
+  {
+    name: "My Privileges",
+    href: "#",
+    icon: "/icons/sidebar/my_privileges.svg",
+  },
+  { name: "Setting", href: "/settings", icon: "/icons/sidebar/settings.svg" },
 ];
 
 export default function Sidebar() {
@@ -31,20 +37,19 @@ export default function Sidebar() {
   return (
     <aside className="w-[250px] bg-white fixed top-0 bottom-0 left-0 hidden md:block border-r border-border">
       {/* Logo */}
-      <div className="h-[100px] flex items-center px-6">
+      <div className="h-[100px] flex items-center pl-[38px]">
         <Link href="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center">
-            <span className="text-white text-xl font-bold">S</span>
-          </div>
-          <span className="text-xl font-semibold text-gray-900">Soar Task</span>
+          <span className="icon-[mingcute--task-fill] w-[35px] h-[35px]" />
+          <p className="text-[25px] font-extrabold font-inter leading-none text-gray-900">
+            Soar Task
+          </p>
         </Link>
       </div>
 
       {/* Navigation */}
-      <nav className="mt-8">
+      <nav className="mt-2">
         {navigation.map((item) => {
           const isActive = pathname === item.href;
-          const Icon = item.icon;
 
           return (
             <Link
@@ -56,10 +61,15 @@ export default function Sidebar() {
                   : "text-[#B1B1B1] hover:bg-gray-50"
               }`}
             >
-              <Icon
-                className={`w-[25px] h-[25px] ${
-                  isActive ? "text-text-primary" : "text-[#B1B1B1]"
-                }`}
+              <img
+                src={item.icon}
+                alt={`${item.name} icon`}
+                className="w-[25px] h-[25px]"
+                style={{
+                  filter: isActive
+                    ? "none"
+                    : "brightness(0) saturate(100%) invert(77%) sepia(0%) saturate(0%) hue-rotate(152deg) brightness(84%) contrast(85%)",
+                }}
               />
               <span>{item.name}</span>
             </Link>

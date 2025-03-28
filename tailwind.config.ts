@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 import typography from "@tailwindcss/typography";
 import forms from "@tailwindcss/forms";
+import { addDynamicIconSelectors } from "@iconify/tailwind";
 
 const config: Config = {
   darkMode: ["class"],
@@ -74,7 +75,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [typography, forms],
+  plugins: [typography, forms, addDynamicIconSelectors()],
 };
 
 export default config;
