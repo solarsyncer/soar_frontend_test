@@ -20,6 +20,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
     }
   };
 
+  const isPathActive = (path: string) => {
+    if (path === "/") return pathname === path;
+    return pathname.startsWith(path);
+  };
+
   return (
     <aside
       className={`
@@ -47,7 +52,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       {/* Navigation */}
       <nav className="mt-[10px]">
         {navigation.map((item) => {
-          const isActive = pathname === item.href && item.enabled;
+          const isActive = isPathActive(item.href) && item.enabled;
 
           return (
             <div
