@@ -1,10 +1,10 @@
 # Next.js Frontend Test Project
 
-This is a modern Next.js project set up for implementing a Figma design. The project uses Next.js 14 with the App Router, TypeScript, and Tailwind CSS.
+This is a modern Next.js project set up for implementing a Figma design. The project uses Next.js 15 with the App Router, TypeScript, and Tailwind CSS.
 
 ## Features
 
-- ⚡️ Next.js 14 with App Router
+- ⚡️ Next.js 15 with App Router
 - 🎨 Tailwind CSS for styling
 - 📝 TypeScript for type safety
 - 🔍 ESLint for code quality
@@ -35,26 +35,11 @@ npm run dev
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Project Structure
-
-```
-src/
-├── app/                 # App router pages
-├── components/          # React components
-│   ├── ui/             # Reusable UI components
-│   └── layout/         # Layout components
-├── lib/                # Utility functions
-├── styles/             # Global styles
-├── types/              # TypeScript types
-└── hooks/              # Custom React hooks
-```
-
 ## Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm start` - Start production server
-- `npm run lint` - Run ESLint
+- `npm run dev` - Development server
+- `npm run build` - Production build
+- `npm run lint` - Lint code
 
 ## Styling
 
@@ -67,18 +52,17 @@ This project uses Tailwind CSS with a custom configuration that includes:
 
 ## Best Practices
 
-1. Use TypeScript for all new files
-2. Follow the component structure in `src/components`
-3. Use the utility functions in `src/lib/utils.ts` for consistent styling
-4. Keep components small and focused
-5. Use Tailwind CSS classes for styling
+- TypeScript for type safety
+- Lazy loading for performance
+- Proper error handling
+- Responsive design
+- Form validation
+- Loading states for async operations
 
-## Contributing
+## Known Limitations
 
-1. Create a new branch for your feature
-2. Make your changes
-3. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License.
+1. No persistent data storage
+2. Mock authentication only
+3. Limited error simulation
+4. No real API integration
+5. Limited offline support
