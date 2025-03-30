@@ -79,30 +79,74 @@ const mockTransactions: Transaction[] = [
 ];
 
 const mockChartData: WeeklyActivity[] = [
-  { day: "Sat", deposit: 220, withdraw: 450 },
-  { day: "Sun", deposit: 110, withdraw: 350 },
-  { day: "Mon", deposit: 250, withdraw: 320 },
-  { day: "Tue", deposit: 360, withdraw: 450 },
-  { day: "Wed", deposit: 230, withdraw: 150 },
-  { day: "Thu", deposit: 230, withdraw: 400 },
-  { day: "Fri", deposit: 320, withdraw: 380 },
+  {
+    day: "Sat",
+    deposit: Math.floor(Math.random() * 401) + 100,
+    withdraw: Math.floor(Math.random() * 401) + 100,
+  },
+  {
+    day: "Sun",
+    deposit: Math.floor(Math.random() * 401) + 100,
+    withdraw: Math.floor(Math.random() * 401) + 100,
+  },
+  {
+    day: "Mon",
+    deposit: Math.floor(Math.random() * 401) + 100,
+    withdraw: Math.floor(Math.random() * 401) + 100,
+  },
+  {
+    day: "Tue",
+    deposit: Math.floor(Math.random() * 401) + 100,
+    withdraw: Math.floor(Math.random() * 401) + 100,
+  },
+  {
+    day: "Wed",
+    deposit: Math.floor(Math.random() * 401) + 100,
+    withdraw: Math.floor(Math.random() * 401) + 100,
+  },
+  {
+    day: "Thu",
+    deposit: Math.floor(Math.random() * 401) + 100,
+    withdraw: Math.floor(Math.random() * 401) + 100,
+  },
+  {
+    day: "Fri",
+    deposit: Math.floor(Math.random() * 401) + 100,
+    withdraw: Math.floor(Math.random() * 401) + 100,
+  },
 ];
 
 const expenseData: ExpenseCategory[] = [
-  { name: "Others", value: 35, color: "#232323" },
-  { name: "Investment", value: 20, color: "#1947E5" },
-  { name: "Entertainment", value: 30, color: "#2D3648" },
-  { name: "Bill Expense", value: 15, color: "#FF8F6B" },
+  {
+    name: "Others",
+    value: 25 + Math.floor(Math.random() * 10),
+    color: "#232323",
+  },
+  {
+    name: "Investment",
+    value: 25 + Math.floor(Math.random() * 10),
+    color: "#1947E5",
+  },
+  {
+    name: "Entertainment",
+    value: 25 + Math.floor(Math.random() * 10),
+    color: "#2D3648",
+  },
+  {
+    name: "Bill Expense",
+    value: 25 + Math.floor(Math.random() * 10),
+    color: "#FF8F6B",
+  },
 ];
 
 const balanceHistoryData: BalanceHistoryData[] = [
-  { month: "Jul", balance: 150 },
-  { month: "Aug", balance: 300 },
-  { month: "Sep", balance: 450 },
-  { month: "Oct", balance: 750 },
-  { month: "Nov", balance: 250 },
-  { month: "Dec", balance: 550 },
-  { month: "Jan", balance: 600 },
+  { month: "Jul", balance: Math.floor(Math.random() * 901) + 100 },
+  { month: "Aug", balance: Math.floor(Math.random() * 901) + 100 },
+  { month: "Sep", balance: Math.floor(Math.random() * 901) + 100 },
+  { month: "Oct", balance: Math.floor(Math.random() * 901) + 100 },
+  { month: "Nov", balance: Math.floor(Math.random() * 901) + 100 },
+  { month: "Dec", balance: Math.floor(Math.random() * 901) + 100 },
+  { month: "Jan", balance: Math.floor(Math.random() * 901) + 100 },
 ];
 
 // Mock API endpoints
