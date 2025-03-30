@@ -68,18 +68,18 @@ const balanceHistoryData: BalanceHistoryData[] = [
 
 export default function DashboardPage() {
   return (
-    <div className="min-h-screen bg-[#F5F7FA]">
-      <div className="max-w-[1440px] mx-auto p-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+    <div className="min-h-screen">
+      <div className="max-w-[1440px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* My cards */}
-          <div className="lg:col-span-2">
+          <div className="col-span-1 md:col-span-12 lg:col-span-8">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-xl font-semibold text-[#343C6A]">My Cards</h2>
               <button className="text-[#343C6A] hover:text-gray-400 font-medium transition-colors">
                 See All
               </button>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="flex md:gap-6 gap-4 overflow-x-auto overflow-y-hidden">
               <CreditCard
                 balance="5,756"
                 cardHolder="Eddy Cusuma"
@@ -98,20 +98,20 @@ export default function DashboardPage() {
           </div>
 
           {/* Recent Transactions */}
-          <div>
+          <div className="col-span-1 md:col-span-12 lg:col-span-4">
             <h2 className="text-xl font-semibold text-[#343C6A] mb-6">
               Recent Transaction
             </h2>
-            <div className="bg-white p-6 h-[235px] rounded-2xl flex flex-col gap-4 justify-between">
+            <div className="bg-white p-4 md:p-6 h-[235px] rounded-2xl flex flex-col gap-4 justify-between">
               {transactions.map((transaction) => (
                 <div
                   key={transaction.id}
                   className="flex items-center justify-between"
                 >
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2 md:gap-4">
                     <div
                       className={cn(
-                        "w-[55px] h-[55px] rounded-full flex items-center justify-center",
+                        "w-[45px] h-[45px] md:w-[55px] md:h-[55px] rounded-full flex items-center justify-center",
                         transaction.type === "deposit" && "bg-[#FFF5D9]",
                         transaction.type === "paypal" && "bg-[#E7EDFF]",
                         transaction.type === "send" && "bg-[#DCFAF8]"
@@ -122,24 +122,25 @@ export default function DashboardPage() {
                         alt={transaction.type}
                         width={28}
                         height={28}
+                        className="w-5 h-5 md:w-7 md:h-7"
                       />
                     </div>
                     <div>
-                      <p className="font-[500] text-base leading-none tracking-[0%] font-inter text-[#232323] mb-1">
+                      <p className="font-[500] text-sm md:text-base leading-none tracking-[0%] font-inter text-[#232323] mb-1">
                         {transaction.type === "deposit"
                           ? "Deposit from my Card"
                           : transaction.type === "paypal"
                           ? "Deposit Paypal"
                           : "Jerni Wilson"}
                       </p>
-                      <p className="text-sm text-[#8BA3CB]">
+                      <p className="text-xs md:text-sm text-[#8BA3CB]">
                         {transaction.date}
                       </p>
                     </div>
                   </div>
                   <p
                     className={cn(
-                      "font-medium",
+                      "font-medium text-sm md:text-base",
                       transaction.type === "deposit"
                         ? "text-[#FF4B4A]"
                         : "text-[#41D4A8]"
@@ -154,32 +155,32 @@ export default function DashboardPage() {
           </div>
 
           {/* Weekly Activity */}
-          <div className="lg:col-span-2">
+          <div className="col-span-1 md:col-span-8">
             <h2 className="text-xl font-semibold text-[#343C6A] mb-6">
               Weekly Activity
             </h2>
-            <div className="bg-white p-6 h-[322px] rounded-2xl">
+            <div className="bg-white p-4 md:p-6 h-[322px] rounded-2xl">
               <WeeklyActivityChart data={weeklyActivityData} />
             </div>
           </div>
 
           {/* Expense Statistics */}
-          <div className="lg:col-span-1">
+          <div className="col-span-1 md:col-span-4">
             <h2 className="text-xl font-semibold text-[#343C6A] mb-6">
               Expense Statistics
             </h2>
-            <div className="bg-white p-6 h-[322px] rounded-2xl">
+            <div className="bg-white p-4 md:p-6 h-[322px] rounded-2xl">
               <ExpenseStatistics data={expenseData} />
             </div>
           </div>
 
           {/* Quick Transfer */}
-          <div className="lg:col-span-1">
+          <div className="col-span-1 md:col-span-12 lg:col-span-5">
             <h2 className="text-xl font-semibold text-[#343C6A] mb-6">
               Quick Transfer
             </h2>
-            <div className="bg-white p-6 h-[275px] rounded-2xl flex flex-col gap-4 justify-around w-full">
-              <div className="flex gap-4 items-center justify-between">
+            <div className="bg-white p-4 md:p-6 h-[220px] md:h-[275px] rounded-2xl flex flex-col gap-3 md:gap-4 justify-around w-full">
+              <div className="flex gap-2 md:gap-4 items-center justify-evenly">
                 {people.map((person, i) => (
                   <div key={i} className="flex flex-col items-center gap-1">
                     <Image
@@ -187,15 +188,17 @@ export default function DashboardPage() {
                       alt={person.name}
                       width={70}
                       height={70}
-                      className="w-[70px] h-[70px] rounded-full mb-2"
+                      className="w-[50px] h-[50px] md:w-[70px] md:h-[70px] rounded-full mb-1 md:mb-2"
                     />
-                    <p className="text-md font-medium text-[#232323]">
+                    <p className="text-sm md:text-md font-medium text-[#232323]">
                       {person.name}
                     </p>
-                    <p className="text-sm text-[#8BA3CB]">{person.role}</p>
+                    <p className="text-xs md:text-sm text-[#8BA3CB]">
+                      {person.role}
+                    </p>
                   </div>
                 ))}
-                <button className="w-[50px] h-[50px] rounded-full bg-white flex items-center justify-center mt-0.5 flex-shrink-0 shadow-[4px_4px_18px_-2px_#E7E4E8CC] hover:bg-gray-50 active:bg-gray-100 transition-colors duration-200 hover:shadow-[4px_4px_18px_-2px_#E7E4E8FF]">
+                <button className="w-[40px] h-[40px] md:w-[50px] md:h-[50px] rounded-full bg-white flex items-center justify-center mt-0.5 flex-shrink-0 shadow-[4px_4px_18px_-2px_#E7E4E8CC] hover:bg-gray-50 active:bg-gray-100 transition-colors duration-200 hover:shadow-[4px_4px_18px_-2px_#E7E4E8FF]">
                   <Image
                     src="/icons/next.svg"
                     alt="next"
@@ -205,17 +208,22 @@ export default function DashboardPage() {
                 </button>
               </div>
 
-              <div className="flex items-center justify-between gap-6 w-full">
-                <p className="text-md text-[#718EBF]">Write Amount</p>
-                <div className="flex-1 bg-gray-50 h-[50px] rounded-full flex items-center justify-between">
-                  <p className="text-[#718EBF] ml-6">525.50</p>
-                  <button className="h-full w-[125px] bg-[#232323] text-white rounded-full font-medium flex items-center gap-3 justify-center hover:bg-[#3a3a3a] active:bg-[#1a1a1a] transition-colors duration-200">
-                    Send
+              <div className="flex items-center justify-between gap-4 md:gap-6 w-full">
+                <p className="text-xs md:text-md text-[#718EBF]">
+                  Write Amount
+                </p>
+                <div className="flex-1 bg-gray-50 h-[35px] md:h-[50px] rounded-full flex items-center justify-between">
+                  <p className="text-[#718EBF] ml-4 md:ml-6 text-xs md:text-base">
+                    525.50
+                  </p>
+                  <button className="h-full w-[80px] md:w-[125px] bg-[#232323] text-white rounded-full font-medium flex items-center gap-2 md:gap-3 justify-center hover:bg-[#3a3a3a] active:bg-[#1a1a1a] transition-colors duration-200">
+                    <span className="text-xs md:text-base">Send</span>
                     <Image
                       src="/icons/send.svg"
                       alt="send"
                       width={26}
                       height={22.6}
+                      className="w-[16px] h-[14px] md:w-[26px] md:h-[22.6px]"
                     />
                   </button>
                 </div>
@@ -224,7 +232,7 @@ export default function DashboardPage() {
           </div>
 
           {/* Balance History */}
-          <div className="lg:col-span-2">
+          <div className="col-span-1 md:col-span-12 lg:col-span-7">
             <h2 className="text-xl font-semibold text-[#343C6A] mb-6">
               Balance History
             </h2>

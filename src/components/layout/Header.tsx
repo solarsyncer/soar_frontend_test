@@ -22,11 +22,11 @@ export default function Header({ onMenuClick }: HeaderProps) {
   };
 
   return (
-    <header className="h-[140px] md:h-[100px] bg-white flex flex-col justify-center gap-5 md:flex-row md:items-center md:justify-between px-6 fixed top-0 right-0 left-0 md:left-[250px] border-b border-border">
+    <header className="h-[140px] md:h-[100px] bg-white flex flex-col justify-center gap-5 md:flex-row md:items-center md:justify-between px-6 fixed top-0 right-0 left-0 lg:left-[250px] border-b border-border z-40">
       <div className="flex items-center justify-between h-[35px] pt-0">
         <button
           onClick={onMenuClick}
-          className="md:hidden h-[35px] flex items-center"
+          className="lg:hidden h-[35px] flex items-center mr-4"
           aria-label="Toggle menu"
         >
           <Image
@@ -68,7 +68,7 @@ export default function Header({ onMenuClick }: HeaderProps) {
           />
         </div>
 
-        {/* Settings and Notifications - Only show on desktop */}
+        {/* Settings and Notifications - Show on tablet and desktop */}
         <div className="hidden md:flex items-center gap-6">
           <button className="w-[50px] h-[50px] flex items-center justify-center bg-[#F5F7FA] rounded-full">
             <Image
@@ -90,7 +90,7 @@ export default function Header({ onMenuClick }: HeaderProps) {
           </button>
         </div>
 
-        {/* Profile - Only show on desktop */}
+        {/* Profile - Show on tablet and desktop */}
         <div className="hidden md:flex items-center gap-3">
           <Image
             src="/images/avatar.png"

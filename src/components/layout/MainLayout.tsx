@@ -25,7 +25,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
       {/* Overlay for mobile when sidebar is open */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
           onClick={handleCloseSidebar}
         />
       )}
@@ -33,8 +33,8 @@ export default function MainLayout({ children }: MainLayoutProps) {
       <Header onMenuClick={handleMenuClick} />
       <Sidebar isOpen={isSidebarOpen} onClose={handleCloseSidebar} />
 
-      <main className="pt-[140px] md:pt-[100px] md:pl-[250px] p-6">
-        <div className="px-1 pt-[25px] md:px-[40px]">{children}</div>
+      <main className="pt-[140px] lg:pt-[100px] lg:pl-[250px] p-6">
+        <div className="px-1 pt-[25px] lg:px-[40px]">{children}</div>
       </main>
     </div>
   );

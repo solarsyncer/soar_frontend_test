@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { PieChart, Pie, Cell } from "recharts";
 import { ExpenseCategory, CustomLabelProps } from "@/types/charts";
 
@@ -41,33 +41,48 @@ const CustomLabel = ({
   );
 };
 
+// Client-side only chart component
+function Chart({ data }: ExpenseStatisticsProps) {
+  return (
+    <PieChart width={300} height={300}>
+      <Pie
+        data={data}
+        cx="50%"
+        cy="50%"
+        labelLine={false}
+        label={CustomLabel}
+        outerRadius={140}
+        stroke="white"
+        strokeWidth={10}
+        dataKey="value"
+        isAnimationActive={false}
+      >
+        {data.map((category, index) => (
+          <Cell key={`cell-${index}`} fill={category.color} />
+        ))}
+      </Pie>
+    </PieChart>
+  );
+}
+
 export function ExpenseStatistics({ data }: ExpenseStatisticsProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <div className="w-[300px] h-[300px] rounded-full bg-gray-50" />
+      </div>
+    );
+  }
+
   return (
     <div className="w-full h-full flex items-center justify-center">
-      <PieChart width={300} height={300}>
-        <defs>
-          <clipPath id="expense-stats-clip">
-            <rect x={0} y={0} width={300} height={300} />
-          </clipPath>
-        </defs>
-        <Pie
-          data={data}
-          cx="50%"
-          cy="50%"
-          labelLine={false}
-          label={CustomLabel}
-          outerRadius={140}
-          stroke="white"
-          strokeWidth={10}
-          dataKey="value"
-          isAnimationActive={false}
-          animationDuration={800}
-        >
-          {data.map((category, index) => (
-            <Cell key={`cell-${index}`} fill={category.color} />
-          ))}
-        </Pie>
-      </PieChart>
+      <Chart data={data} />
     </div>
   );
 }

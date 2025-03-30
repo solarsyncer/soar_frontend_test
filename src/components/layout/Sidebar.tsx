@@ -25,7 +25,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       className={`
       fixed top-0 left-0 h-full w-[250px] bg-white border-r border-[#E6EFF5]
       transform transition-transform duration-300 ease-in-out
-      md:transform-none
+      lg:transform-none
       ${!isOpen ? "-translate-x-full" : "translate-x-0"}
       z-50
     `}
@@ -45,7 +45,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       </div>
 
       {/* Navigation */}
-      <nav className="mt-2">
+      <nav className="mt-[10px]">
         {navigation.map((item) => {
           const isActive = pathname === item.href && item.enabled;
 
