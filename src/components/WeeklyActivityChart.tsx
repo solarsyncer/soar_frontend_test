@@ -1,4 +1,15 @@
+"use client";
+
 import React from "react";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  ResponsiveContainer,
+  Tooltip,
+} from "recharts";
 
 interface WeeklyActivityData {
   day: string;
@@ -6,80 +17,81 @@ interface WeeklyActivityData {
   withdraw: number;
 }
 
-const mockData: WeeklyActivityData[] = [
-  { day: "Sat", deposit: 220, withdraw: 450 },
-  { day: "Sun", deposit: 110, withdraw: 350 },
-  { day: "Mon", deposit: 250, withdraw: 320 },
-  { day: "Tue", deposit: 360, withdraw: 450 },
-  { day: "Wed", deposit: 230, withdraw: 150 },
-  { day: "Thu", deposit: 230, withdraw: 400 },
-  { day: "Fri", deposit: 320, withdraw: 380 },
-];
+interface WeeklyActivityChartProps {
+  data: WeeklyActivityData[];
+}
 
-const yAxisLabels = [500, 400, 300, 200, 100, 0];
-
-export function WeeklyActivityChart() {
+const CustomLegend = () => {
   return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-6">
-        <div className="flex items-center gap-2">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#2D60FF]" />
-          <span className="text-sm text-[#232323]">Deposit</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="w-2.5 h-2.5 rounded-full bg-[#232323]" />
-          <span className="text-sm text-[#232323]">Withdraw</span>
-        </div>
+    <div className="flex items-center gap-6">
+      <div className="flex items-center gap-2">
+        <div className="w-2.5 h-2.5 rounded-full bg-[#2D60FF]" />
+        <span className="text-sm text-[#718EBF]">Deposit</span>
       </div>
+      <div className="flex items-center gap-2">
+        <div className="w-2.5 h-2.5 rounded-full bg-[#232323]" />
+        <span className="text-sm text-[#718EBF]">Withdraw</span>
+      </div>
+    </div>
+  );
+};
 
-      <div className="relative pl-12">
-        {/* Y-axis labels */}
-        <div className="absolute left-0 top-0 h-full flex flex-col justify-between">
-          {yAxisLabels.map((value) => (
-            <div
-              key={value}
-              className="text-xs text-[#8BA3CB] -translate-y-1/2"
-            >
-              {value}
-            </div>
-          ))}
-        </div>
-
-        {/* Chart grid */}
-        <div className="absolute inset-0 pl-12 flex flex-col justify-between">
-          {yAxisLabels.map((_, i) => (
-            <div key={i} className="border-b border-gray-100 w-full h-0" />
-          ))}
-        </div>
-
-        {/* Bars */}
-        <div className="h-64 flex items-end justify-between">
-          {mockData.map((data, index) => (
-            <div key={index} className="flex gap-1.5 h-full items-end">
-              <div
-                className="w-2.5 bg-[#2D60FF] rounded-full transition-all duration-300"
-                style={{
-                  height: `${(data.deposit / 500) * 100}%`,
-                }}
-              />
-              <div
-                className="w-2.5 bg-[#232323] rounded-full transition-all duration-300"
-                style={{
-                  height: `${(data.withdraw / 500) * 100}%`,
-                }}
-              />
-            </div>
-          ))}
-        </div>
-
-        {/* X-axis labels */}
-        <div className="flex justify-between mt-4">
-          {mockData.map((data, index) => (
-            <span key={index} className="text-xs text-[#8BA3CB]">
-              {data.day}
-            </span>
-          ))}
-        </div>
+export function WeeklyActivityChart({ data }: WeeklyActivityChartProps) {
+  return (
+    <div>
+      <div className="flex justify-end">
+        <CustomLegend />
+      </div>
+      <div className="w-full h-full">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            data={data}
+            margin={{ top: 0, right: 0, left: -20, bottom: 0 }}
+            barGap={1}
+          >
+            <CartesianGrid
+              horizontal={true}
+              vertical={false}
+              stroke="#F5F7FA"
+            />
+            <XAxis
+              dataKey="day"
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: "#718EBF", fontSize: 13 }}
+              dy={10}
+            />
+            <YAxis
+              axisLine={false}
+              tickLine={false}
+              tick={{ fill: "#718EBF", fontSize: 13 }}
+              ticks={[0, 100, 200, 300, 400, 500]}
+            />
+            <Tooltip
+              cursor={{ fill: "transparent" }}
+              contentStyle={{
+                backgroundColor: "#fff",
+                border: "none",
+                borderRadius: "8px",
+                boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)",
+              }}
+              itemStyle={{ color: "#232323" }}
+              labelStyle={{ color: "#8BA3CB" }}
+            />
+            <Bar
+              dataKey="deposit"
+              fill="#232323"
+              radius={[8, 8, 8, 8]}
+              maxBarSize={16}
+            />
+            <Bar
+              dataKey="withdraw"
+              fill="#2D60FF"
+              radius={[8, 8, 8, 8]}
+              maxBarSize={16}
+            />
+          </BarChart>
+        </ResponsiveContainer>
       </div>
     </div>
   );
