@@ -44,7 +44,11 @@ export function CreditCard({
                 isDark ? "text-white" : "text-[#232323]"
               )}
             >
-              ${balance}
+              $
+              {Number(balance).toLocaleString(undefined, {
+                maximumFractionDigits: 0,
+                useGrouping: true,
+              })}
             </p>
           </div>
           <Image
@@ -115,7 +119,7 @@ export function CreditCard({
             isDark ? "text-white" : "text-[#343C6A]"
           )}
         >
-          {cardNumber}
+          {cardNumber.slice(0, 4) + " **** **** " + cardNumber.slice(-4)}
         </p>
         <Image
           src="/icons/card/placeholder.svg"

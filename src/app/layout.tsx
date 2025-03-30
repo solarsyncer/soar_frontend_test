@@ -1,3 +1,4 @@
+import { AppProvider } from "@/context/AppContext";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
@@ -9,8 +10,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Soar Task",
-  description: "Task Management Application",
+  title: "SOAR Frontend",
+  description: "SOAR Frontend Test Application",
 };
 
 export default function RootLayout({
@@ -21,7 +22,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body>
-        <MainLayout>{children}</MainLayout>
+        <AppProvider>
+          <MainLayout>{children}</MainLayout>
+        </AppProvider>
       </body>
     </html>
   );

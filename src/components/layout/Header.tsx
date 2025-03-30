@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useApp } from "@/context/AppContext";
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -9,6 +10,7 @@ interface HeaderProps {
 
 export default function Header({ onMenuClick }: HeaderProps) {
   const pathname = usePathname();
+  const { user, loading } = useApp();
 
   const getTitle = () => {
     switch (pathname) {
@@ -19,6 +21,27 @@ export default function Header({ onMenuClick }: HeaderProps) {
       default:
         return "Overview";
     }
+  };
+
+  // Profile avatar component to reduce repetition
+  const ProfileAvatar = ({ size }: { size: number }) => {
+    if (loading.user) {
+      return (
+        <div
+          className={`w-[${size}px] h-[${size}px] bg-gray-200 rounded-full animate-pulse`}
+        />
+      );
+    }
+
+    return (
+      <Image
+        src={user?.avatar || "/images/avatar.png"}
+        alt={user?.name || "Profile"}
+        width={size}
+        height={size}
+        className={`w-[${size}px] h-[${size}px] rounded-full`}
+      />
+    );
   };
 
   return (
@@ -41,13 +64,7 @@ export default function Header({ onMenuClick }: HeaderProps) {
           {getTitle()}
         </h1>
         <div className="md:hidden h-[35px] flex items-center">
-          <Image
-            src="/images/avatar.png"
-            alt="Profile"
-            width={35}
-            height={35}
-            className="w-[35px] h-[35px] rounded-full"
-          />
+          <ProfileAvatar size={35} />
         </div>
       </div>
 
@@ -92,13 +109,7 @@ export default function Header({ onMenuClick }: HeaderProps) {
 
         {/* Profile - Show on tablet and desktop */}
         <div className="hidden md:flex items-center gap-3">
-          <Image
-            src="/images/avatar.png"
-            alt="Profile"
-            width={60}
-            height={60}
-            className="w-[60px] h-[60px] rounded-full"
-          />
+          <ProfileAvatar size={60} />
         </div>
       </div>
     </header>
