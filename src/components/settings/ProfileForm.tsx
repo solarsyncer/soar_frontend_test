@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, lazy, Suspense } from "react";
+import { useState, useRef, lazy, Suspense, useEffect } from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import {
@@ -83,6 +83,25 @@ export function ProfileForm() {
       avatar: user?.avatar || "/images/avatar.png",
     },
   });
+
+  useEffect(() => {
+    if (!loading.user && user) {
+      setValue("name", user.name || "");
+      setValue("username", user.username || "");
+      setValue("email", user.email || "");
+      setValue("password", user.password || "");
+      setValue(
+        "dateOfBirth",
+        user.dateOfBirth ? new Date(user.dateOfBirth) : undefined
+      );
+      setValue("presentAddress", user.presentAddress || "");
+      setValue("permanentAddress", user.permanentAddress || "");
+      setValue("city", user.city || "");
+      setValue("postalCode", user.postalCode || "");
+      setValue("country", user.country || "");
+      setValue("avatar", user.avatar || "/images/avatar.png");
+    }
+  }, [loading.user, user, setValue]);
 
   const onSubmit = (data: ProfileFormData) => {
     console.log(data);
