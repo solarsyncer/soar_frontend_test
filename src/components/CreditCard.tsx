@@ -1,4 +1,5 @@
-import React from "react";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 interface CreditCardProps {
   balance: string;
@@ -19,96 +20,108 @@ export function CreditCard({
 
   return (
     <div
-      className={`relative w-full p-6 rounded-2xl ${
-        isDark ? "bg-[#232323]" : "bg-white"
-      }`}
+      className={cn(
+        "min-w-[300px] w-full h-[235px] rounded-2xl",
+        isDark
+          ? "bg-[linear-gradient(107.38deg,_#5B5A6F_2.61%,_#000000_101.2%)]"
+          : "bg-white border border-[#DFEAF2]"
+      )}
     >
-      <div className="space-y-6">
+      <div className="h-[165px] flex flex-col px-6 justify-center gap-6">
         <div className="flex justify-between items-center">
           <div>
             <p
-              className={`text-xs mb-1 ${
-                isDark ? "text-gray-400" : "text-gray-500"
-              }`}
+              className={cn(
+                "text-xs",
+                isDark ? "text-white" : "text-[#718EBF]"
+              )}
             >
               Balance
             </p>
             <p
-              className={`text-2xl font-semibold ${
+              className={cn(
+                "text-2xl font-semibold",
                 isDark ? "text-white" : "text-[#232323]"
-              }`}
+              )}
             >
               ${balance}
             </p>
           </div>
-          <div className="w-12 h-8">
-            <div
-              className={`w-10 h-8 rounded bg-white/10 ${
-                isDark ? "bg-white/10" : "bg-gray-100"
-              }`}
-            />
-          </div>
+          <Image
+            src={
+              isDark ? "/images/Chip_Card_dark.png" : "/images/Chip_Card.png"
+            }
+            alt="chip"
+            width={34.77}
+            height={34.77}
+          />
         </div>
 
-        <div className="flex justify-between items-end">
+        <div className="flex items-center gap-24">
           <div>
             <p
-              className={`text-xs mb-1 ${
-                isDark ? "text-gray-400" : "text-gray-500"
-              }`}
+              className={cn(
+                "text-xs",
+                isDark ? "text-gray-400" : "text-[#8BA3CB]"
+              )}
             >
               CARD HOLDER
             </p>
             <p
-              className={`font-medium ${
+              className={cn(
+                "font-medium",
                 isDark ? "text-white" : "text-[#232323]"
-              }`}
+              )}
             >
               {cardHolder}
             </p>
           </div>
 
-          <div className="text-right">
+          <div>
             <p
-              className={`text-xs mb-1 ${
-                isDark ? "text-gray-400" : "text-gray-500"
-              }`}
+              className={cn(
+                "text-xs",
+                isDark ? "text-gray-400" : "text-[#8BA3CB]"
+              )}
             >
               VALID THRU
             </p>
             <p
-              className={`font-medium ${
+              className={cn(
+                "font-medium",
                 isDark ? "text-white" : "text-[#232323]"
-              }`}
+              )}
             >
               {validThru}
             </p>
           </div>
         </div>
+      </div>
 
-        <div>
-          <p
-            className={`font-medium tracking-widest ${
-              isDark ? "text-white" : "text-[#232323]"
-            }`}
-          >
-            {cardNumber}
-          </p>
-          <div className="absolute bottom-6 right-6">
-            <div className="flex gap-1">
-              <div
-                className={`w-6 h-4 rounded-full ${
-                  isDark ? "bg-white/20" : "bg-gray-200"
-                }`}
-              />
-              <div
-                className={`w-6 h-4 rounded-full ${
-                  isDark ? "bg-white/20" : "bg-gray-200"
-                }`}
-              />
-            </div>
-          </div>
-        </div>
+      {!isDark && <hr className="w-full bg-[#DFEAF2]" />}
+
+      <div
+        className={cn(
+          "h-[70px] flex items-center justify-between px-6",
+          isDark
+            ? "bg-[linear-gradient(180deg,_rgba(255,255,255,0.15)_0%,_rgba(255,255,255,0)_100%)] rounded-bl-2xl rounded-br-2xl"
+            : ""
+        )}
+      >
+        <p
+          className={cn(
+            "font-medium tracking-widest text-[22px]",
+            isDark ? "text-white" : "text-[#343C6A]"
+          )}
+        >
+          {cardNumber}
+        </p>
+        <Image
+          src="/icons/card/placeholder.svg"
+          alt="card"
+          width={44}
+          height={30}
+        />
       </div>
     </div>
   );
