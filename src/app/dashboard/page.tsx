@@ -2,10 +2,12 @@ import Image from "next/image";
 import { CreditCard } from "@/components/CreditCard";
 import { WeeklyActivityChart } from "@/components/WeeklyActivityChart";
 import { ExpenseStatistics } from "@/components/ExpenseStatistics";
+import { BalanceHistory } from "@/components/BalanceHistory";
 import type {
   ExpenseCategory,
   WeeklyActivity,
   Transaction,
+  BalanceHistoryData,
 } from "@/types/charts";
 import { cn } from "@/lib/utils";
 
@@ -46,6 +48,22 @@ const expenseData: ExpenseCategory[] = [
     value: 15,
     color: "#FF8F6B", // Orange
   },
+];
+
+const people = [
+  { name: "Livia Bator", role: "CEO", avatar: "/images/avatar-2.png" },
+  { name: "Randy Press", role: "Director", avatar: "/images/avatar-1.png" },
+  { name: "Workman", role: "Designer", avatar: "/images/avatar-3.png" },
+];
+
+const balanceHistoryData: BalanceHistoryData[] = [
+  { month: "Jul", balance: 150 },
+  { month: "Aug", balance: 300 },
+  { month: "Sep", balance: 450 },
+  { month: "Oct", balance: 750 },
+  { month: "Nov", balance: 250 },
+  { month: "Dec", balance: 550 },
+  { month: "Jan", balance: 600 },
 ];
 
 export default function DashboardPage() {
@@ -154,60 +172,64 @@ export default function DashboardPage() {
               <ExpenseStatistics data={expenseData} />
             </div>
           </div>
-        </div>
 
-        {/* Third Row: Quick Transfer (1/3) and Balance History (2/3) */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="bg-white rounded-xl p-6">
-            <h2 className="text-xl font-semibold text-[#232323] mb-6">
+          {/* Quick Transfer */}
+          <div className="lg:col-span-1">
+            <h2 className="text-xl font-semibold text-[#343C6A] mb-6">
               Quick Transfer
             </h2>
-            <div className="flex gap-4 mb-6 overflow-x-auto pb-2">
-              {[
-                { name: "Livia Bator", role: "CEO" },
-                { name: "Randy Press", role: "Director" },
-                { name: "Workman", role: "Designer" },
-              ].map((person, i) => (
-                <div key={i} className="text-center flex-shrink-0">
-                  <div className="w-12 h-12 rounded-full bg-gray-200 mb-2" />
-                  <p className="text-sm font-medium text-[#232323]">
-                    {person.name}
-                  </p>
-                  <p className="text-xs text-[#8BA3CB]">{person.role}</p>
-                </div>
-              ))}
-              <button className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center mt-0.5 flex-shrink-0">
-                <span className="icon-[mingcute--arrow-right-line] w-5 h-5 text-gray-400" />
-              </button>
-            </div>
-            <div className="flex gap-3">
-              <div className="flex-1 px-4 py-3 bg-gray-50 rounded-lg">
-                <p className="text-xs text-[#8BA3CB] mb-1">Write Amount</p>
-                <p className="text-[#232323]">525.50</p>
+            <div className="bg-white p-6 h-[275px] rounded-2xl flex flex-col gap-4 justify-around w-full">
+              <div className="flex gap-4 items-center justify-between">
+                {people.map((person, i) => (
+                  <div key={i} className="flex flex-col items-center gap-1">
+                    <Image
+                      src={person.avatar}
+                      alt={person.name}
+                      width={70}
+                      height={70}
+                      className="w-[70px] h-[70px] rounded-full mb-2"
+                    />
+                    <p className="text-md font-medium text-[#232323]">
+                      {person.name}
+                    </p>
+                    <p className="text-sm text-[#8BA3CB]">{person.role}</p>
+                  </div>
+                ))}
+                <button className="w-[50px] h-[50px] rounded-full bg-white flex items-center justify-center mt-0.5 flex-shrink-0 shadow-[4px_4px_18px_-2px_#E7E4E8CC] hover:bg-gray-50 active:bg-gray-100 transition-colors duration-200 hover:shadow-[4px_4px_18px_-2px_#E7E4E8FF]">
+                  <Image
+                    src="/icons/next.svg"
+                    alt="next"
+                    width={6.5}
+                    height={13}
+                  />
+                </button>
               </div>
-              <button className="px-5 py-3 bg-[#232323] text-white rounded-lg font-medium flex items-center gap-2">
-                Send
-                <span className="icon-[mingcute--send-plane-fill] w-5 h-5" />
-              </button>
+
+              <div className="flex items-center justify-between gap-6 w-full">
+                <p className="text-md text-[#718EBF]">Write Amount</p>
+                <div className="flex-1 bg-gray-50 h-[50px] rounded-full flex items-center justify-between">
+                  <p className="text-[#718EBF] ml-6">525.50</p>
+                  <button className="h-full w-[125px] bg-[#232323] text-white rounded-full font-medium flex items-center gap-3 justify-center hover:bg-[#3a3a3a] active:bg-[#1a1a1a] transition-colors duration-200">
+                    Send
+                    <Image
+                      src="/icons/send.svg"
+                      alt="send"
+                      width={26}
+                      height={22.6}
+                    />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="lg:col-span-2 bg-white rounded-xl p-6">
-            <h2 className="text-xl font-semibold text-[#232323] mb-6">
+
+          {/* Balance History */}
+          <div className="lg:col-span-2">
+            <h2 className="text-xl font-semibold text-[#343C6A] mb-6">
               Balance History
             </h2>
-            <div className="h-[200px] relative">
-              {/* This is a placeholder for the area chart */}
-              <div className="absolute inset-0 bg-gradient-to-b from-blue-50 to-transparent rounded-lg" />
-              <div className="absolute bottom-0 left-0 right-0 h-px bg-blue-100" />
-              <div className="absolute bottom-0 left-0 right-0 flex justify-between text-xs text-[#8BA3CB] py-2">
-                <span>Jul</span>
-                <span>Aug</span>
-                <span>Sep</span>
-                <span>Oct</span>
-                <span>Nov</span>
-                <span>Dec</span>
-                <span>Jan</span>
-              </div>
+            <div className="bg-white p-6 h-[275px] rounded-2xl flex w-full justify-center items-center">
+              <BalanceHistory data={balanceHistoryData} />
             </div>
           </div>
         </div>

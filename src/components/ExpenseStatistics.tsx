@@ -45,6 +45,11 @@ export function ExpenseStatistics({ data }: ExpenseStatisticsProps) {
   return (
     <div className="w-full h-full flex items-center justify-center">
       <PieChart width={300} height={300}>
+        <defs>
+          <clipPath id="expense-stats-clip">
+            <rect x={0} y={0} width={300} height={300} />
+          </clipPath>
+        </defs>
         <Pie
           data={data}
           cx="50%"
@@ -55,7 +60,7 @@ export function ExpenseStatistics({ data }: ExpenseStatisticsProps) {
           stroke="white"
           strokeWidth={10}
           dataKey="value"
-          isAnimationActive={true}
+          isAnimationActive={false}
           animationDuration={800}
         >
           {data.map((category, index) => (

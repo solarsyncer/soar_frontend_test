@@ -26,3 +26,8 @@ export interface CustomLabelProps {
   name: string;
   value: number;
 }
+
+export interface BalanceHistoryData {
+  month: string;
+  balance: number;
+}
