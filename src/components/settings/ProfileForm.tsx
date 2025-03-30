@@ -3,13 +3,20 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { format } from "date-fns";
 
 interface ProfileFormData {
   name: string;
   username: string;
   email: string;
   password: string;
-  dateOfBirth: string;
+  dateOfBirth: Date | undefined;
   presentAddress: string;
   permanentAddress: string;
   city: string;
@@ -23,13 +30,15 @@ export function ProfileForm() {
     username: "Charlene Reed",
     email: "charlenereed@gmail.com",
     password: "••••••••••",
-    dateOfBirth: "25 January 1990",
+    dateOfBirth: new Date(1990, 0, 25), // January 25, 1990
     presentAddress: "San Jose, California, USA",
     permanentAddress: "San Jose, California, USA",
     city: "San Jose",
     postalCode: "45962",
     country: "USA",
   });
+
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -108,14 +117,43 @@ export function ProfileForm() {
             </div>
             <div>
               <label className="block text-sm mb-2">Date of Birth</label>
-              <Input
-                value={formData.dateOfBirth}
-                placeholder="Enter your date of birth"
-                onChange={(e) =>
-                  setFormData({ ...formData, dateOfBirth: e.target.value })
-                }
-                className="h-[50px] border-[#DFEAF2] text-[#232323]"
-              />
+              <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+                <PopoverTrigger asChild>
+                  <div className="relative cursor-pointer">
+                    <Input
+                      type="text"
+                      value={
+                        formData.dateOfBirth
+                          ? format(formData.dateOfBirth, "dd MMMM yyyy")
+                          : ""
+                      }
+                      placeholder="Enter your date of birth"
+                      className="h-[50px] border-[#DFEAF2] text-[#232323] pr-12"
+                      readOnly
+                    />
+                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                      <Image
+                        src="/icons/down.svg"
+                        alt="Calendar"
+                        width={12}
+                        height={6}
+                      />
+                    </div>
+                  </div>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={formData.dateOfBirth}
+                    onSelect={(date) => {
+                      setFormData({ ...formData, dateOfBirth: date });
+                      setIsCalendarOpen(false);
+                    }}
+                    initialFocus
+                    className="rounded-md border border-[#DFEAF2]"
+                  />
+                </PopoverContent>
+              </Popover>
             </div>
             <div>
               <label className="block text-sm mb-2">Present Address</label>
