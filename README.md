@@ -1,10 +1,10 @@
 # Next.js Frontend Test Project
 
-This is a modern Next.js project set up for implementing a Figma design. The project uses Next.js 14 with the App Router, TypeScript, and Tailwind CSS.
+This is a modern Next.js project set up for implementing a Figma design. The project uses Next.js 15 with the App Router, TypeScript, and Tailwind CSS.
 
 ## Features
 
-- ⚡️ Next.js 14 with App Router
+- ⚡️ Next.js 15 with App Router
 - 🎨 Tailwind CSS for styling
 - 📝 TypeScript for type safety
 - 🔍 ESLint for code quality
