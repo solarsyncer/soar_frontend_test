@@ -38,7 +38,7 @@ const CustomLegend = () => {
 
 export function WeeklyActivityChart({ data }: WeeklyActivityChartProps) {
   return (
-    <div>
+    <div className="w-full h-full">
       <div className="flex justify-end">
         <CustomLegend />
       </div>
@@ -59,7 +59,7 @@ export function WeeklyActivityChart({ data }: WeeklyActivityChartProps) {
               axisLine={false}
               tickLine={false}
               tick={{ fill: "#718EBF", fontSize: 13 }}
-              dy={10}
+              dy={5}
             />
             <YAxis
               axisLine={false}

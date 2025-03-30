@@ -2,15 +2,20 @@ import Image from "next/image";
 import { CreditCard } from "@/components/CreditCard";
 import { WeeklyActivityChart } from "@/components/WeeklyActivityChart";
 import { ExpenseStatistics } from "@/components/ExpenseStatistics";
+import type {
+  ExpenseCategory,
+  WeeklyActivity,
+  Transaction,
+} from "@/types/charts";
 import { cn } from "@/lib/utils";
 
-const transactions = [
+const transactions: Transaction[] = [
   { id: 1, type: "deposit", amount: 850, date: "28 January 2021" },
   { id: 2, type: "paypal", amount: 2500, date: "25 January 2021" },
   { id: 3, type: "send", amount: 5400, date: "21 January 2021" },
 ];
 
-const weeklyActivityData = [
+const weeklyActivityData: WeeklyActivity[] = [
   { day: "Sat", deposit: 220, withdraw: 450 },
   { day: "Sun", deposit: 110, withdraw: 350 },
   { day: "Mon", deposit: 250, withdraw: 320 },
@@ -18,6 +23,29 @@ const weeklyActivityData = [
   { day: "Wed", deposit: 230, withdraw: 150 },
   { day: "Thu", deposit: 230, withdraw: 400 },
   { day: "Fri", deposit: 320, withdraw: 380 },
+];
+
+const expenseData: ExpenseCategory[] = [
+  {
+    name: "Others",
+    value: 35,
+    color: "#232323", // Black
+  },
+  {
+    name: "Investment",
+    value: 20,
+    color: "#1947E5", // Bright blue
+  },
+  {
+    name: "Entertainment",
+    value: 30,
+    color: "#2D3648", // Dark navy
+  },
+  {
+    name: "Bill Expense",
+    value: 15,
+    color: "#FF8F6B", // Orange
+  },
 ];
 
 export default function DashboardPage() {
@@ -116,20 +144,15 @@ export default function DashboardPage() {
               <WeeklyActivityChart data={weeklyActivityData} />
             </div>
           </div>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 bg-white rounded-xl p-6">
-            <h2 className="text-xl font-semibold text-[#232323] mb-6">
-              Weekly Activity
-            </h2>
-            <WeeklyActivityChart data={weeklyActivityData} />
-          </div>
-          <div className="bg-white rounded-xl p-6">
-            <h2 className="text-xl font-semibold text-[#232323] mb-6">
+          {/* Expense Statistics */}
+          <div className="lg:col-span-1">
+            <h2 className="text-xl font-semibold text-[#343C6A] mb-6">
               Expense Statistics
             </h2>
-            <ExpenseStatistics />
+            <div className="bg-white p-6 h-[322px] rounded-2xl">
+              <ExpenseStatistics data={expenseData} />
+            </div>
           </div>
         </div>
 

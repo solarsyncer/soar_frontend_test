@@ -1,65 +1,68 @@
-import React from "react";
+"use client";
 
-interface ExpenseCategory {
-  name: string;
-  percentage: number;
-  color: string;
+import React from "react";
+import { PieChart, Pie, Cell } from "recharts";
+import { ExpenseCategory, CustomLabelProps } from "@/types/charts";
+
+interface ExpenseStatisticsProps {
+  data: ExpenseCategory[];
 }
 
-const categories: ExpenseCategory[] = [
-  { name: "Entertainment", percentage: 30, color: "#2D60FF" },
-  { name: "Investment", percentage: 20, color: "#1947E5" },
-  { name: "Bill Expense", percentage: 15, color: "#FF8F6B" },
-  { name: "Others", percentage: 35, color: "#232323" },
-];
-
-export function ExpenseStatistics() {
-  let cumulativePercentage = 0;
+const CustomLabel = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  name,
+  value,
+}: CustomLabelProps) => {
+  const RADIAN = Math.PI / 180;
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.6;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
   return (
-    <div className="flex items-center justify-between">
-      <div className="relative w-48 h-48">
-        <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
-          {categories.map((category, index) => {
-            const startAngle = cumulativePercentage;
-            cumulativePercentage += category.percentage;
-            const endAngle = cumulativePercentage;
+    <text
+      x={x}
+      y={y}
+      fill="white"
+      textAnchor="middle"
+      dominantBaseline="central"
+      style={{ fontSize: "18px", fontWeight: 600 }}
+    >
+      <tspan x={x} dy="-0.5em">
+        {value}%
+      </tspan>
+      <tspan x={x} dy="1.2em" style={{ fontSize: "13px" }}>
+        {name}
+      </tspan>
+    </text>
+  );
+};
 
-            const x1 = 50 + 40 * Math.cos((startAngle / 100) * 2 * Math.PI);
-            const y1 = 50 + 40 * Math.sin((startAngle / 100) * 2 * Math.PI);
-            const x2 = 50 + 40 * Math.cos((endAngle / 100) * 2 * Math.PI);
-            const y2 = 50 + 40 * Math.sin((endAngle / 100) * 2 * Math.PI);
-
-            const largeArcFlag = category.percentage > 50 ? 1 : 0;
-
-            return (
-              <path
-                key={index}
-                d={`M 50 50 L ${x1} ${y1} A 40 40 0 ${largeArcFlag} 1 ${x2} ${y2} Z`}
-                fill={category.color}
-                className="transition-all duration-300"
-              />
-            );
-          })}
-        </svg>
-      </div>
-
-      <div className="space-y-4">
-        {categories.map((category, index) => (
-          <div key={index} className="flex items-center gap-3">
-            <div
-              className="w-2.5 h-2.5 rounded-full"
-              style={{ backgroundColor: category.color }}
-            />
-            <div>
-              <p className="text-sm font-medium text-[#232323]">
-                {category.name}
-              </p>
-              <p className="text-xs text-[#8BA3CB]">{category.percentage}%</p>
-            </div>
-          </div>
-        ))}
-      </div>
+export function ExpenseStatistics({ data }: ExpenseStatisticsProps) {
+  return (
+    <div className="w-full h-full flex items-center justify-center">
+      <PieChart width={300} height={300}>
+        <Pie
+          data={data}
+          cx="50%"
+          cy="50%"
+          labelLine={false}
+          label={CustomLabel}
+          outerRadius={140}
+          stroke="white"
+          strokeWidth={10}
+          dataKey="value"
+          isAnimationActive={true}
+          animationDuration={800}
+        >
+          {data.map((category, index) => (
+            <Cell key={`cell-${index}`} fill={category.color} />
+          ))}
+        </Pie>
+      </PieChart>
     </div>
   );
 }
